@@ -1,1 +1,254 @@
-Being worked on! Check back in a few days!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Special edition of Pixel Playground</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Black+Ops+One&family=Bungee&family=Bubblegum+Sans&family=Fredoka+One&family=Nosifer&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Bungee', sans-serif;
+      background-color: #000;
+      color: #fff;
+      margin: 0;
+      padding-bottom: 60px;
+      text-align: center;
+      transition: color 0.3s, background-color 0.3s;
+      user-select: none;
+    }
+    #buttonsContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      max-width: 960px;
+      margin: 60px auto 20px;
+      justify-items: center;
+    }
+    #buttonsContainer button {
+      width: 150px;
+      height: 150px;
+      background-color: #FFA500;
+      border: 2px solid #FFA500;
+      border-radius: 8px;
+      color: #000;
+      font-family: inherit;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, border-color 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 1.2;
+      user-select: none;
+      padding: 10px;
+    }
+    #buttonsContainer button:hover {
+      background-color: #FF7F50;
+      border-color: #FF7F50;
+      color: #000;
+    }
+    h1 {
+      padding: 16px 0;
+      margin: 0;
+      font-size: 2rem;
+      color: #fff;
+      font-size: 38px;
+    }
+    .text-box {
+      max-width: 960px;
+      margin: 20px auto 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 8px;
+      color: #fff;
+      user-select: text;
+      text-align: center;
+    }
+    .text-box button {
+      margin-top: 10px;
+      background-color: #FFA500;
+      color: #000;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+    .text-box button:hover {
+      background-color: #FF7F50;
+    }
+    .bottom-nav {
+      background-color: #000;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      box-shadow: 0 -2px 10px rgba(255, 165, 0, 0.5);
+      z-index: 1000;
+    }
+    .nav-item {
+      padding: 14px;
+      color: #FFA500;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .nav-item:hover {
+      background-color: #FFA500;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Entertainment - Everything on the Pixel Playground site!</h1>
+
+  <div class="text-box">
+    <h3>This was made because my friend of SJHS said linewize was blocking onecompiler! So I put all the entertainment into one page to use with n.nu and things like that! Also, Creds to Chez for codes+persistence. EVERYTHING OPENS IN ABOUT:BLANK! </h3>
+    <h99>Also, some of the games might take a little bit to load cuz the code is so long</h99>
+    <h2>IMPORTANT</h2>
+    <p>If this is your first time or you encounter CORS issues, please request access to the CORS demo server by clicking the button below.</p>
+    <button id="requestAccessBtn">Request CORS Access</button>
+    <p>Ctrl + F To search for the things also!</p>
+    <p>Also, this comes with a few bad things. Settings and Home Menu dosent work so i guess you are stuck with what config you had before OneCompiler got blocked. :(</p>
+  </div>
+
+  <div id="buttonsContainer" aria-label="Games Buttons Container"></div>
+
+  <nav class="bottom-nav" role="navigation" aria-label="Bottom navigation">
+    <a href="index.html" class="nav-item" aria-label="Home">Home</a>
+    <a href="#" class="nav-item" onclick="alert('Settings only configurable on home page.'); return false;" aria-label="Settings">Settings</a>
+    <a href="#" class="nav-item" onclick="alert('Menu only available on home page.'); return false;" aria-label="Menu">Menu</a>
+  </nav>
+
+<script>
+  // Load appearance settings from localStorage and apply
+  function loadAppearanceSettings() {
+    const body = document.body;
+    const font = localStorage.getItem('userFont');
+    const fontSize = localStorage.getItem('userFontSize');
+    const textColor = localStorage.getItem('userTextColor');
+    const bgImage = localStorage.getItem('userBackgroundImage');
+    const bgColor = localStorage.getItem('userBackgroundColor');
+
+    if (font) body.style.fontFamily = font;
+    if (fontSize) body.style.fontSize = fontSize;
+    if (textColor) body.style.color = textColor;
+    else body.style.color = '#fff';
+
+    if (bgImage) {
+      if (bgImage.trim() !== '') {
+        body.style.backgroundImage = `url('${bgImage}')`;
+        body.classList.add('background-image-mode');
+        body.style.backgroundColor = '';
+      } else {
+        body.style.backgroundImage = '';
+        body.classList.remove('background-image-mode');
+        body.style.backgroundColor = bgColor || '#000';
+      }
+    } else {
+      body.style.backgroundImage = '';
+      body.classList.remove('background-image-mode');
+      body.style.backgroundColor = bgColor || '#000';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadAppearanceSettings();
+
+    document.getElementById('requestAccessBtn').addEventListener('click', function() {
+      window.open('https://cors-anywhere.herokuapp.com/corsdemo', '_blank');
+    });
+
+const games = [
+  { name: "Crazy Cars", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/crazycars.html" },
+  { name: "Pokemon Diamond", url: "https://raw.githubusercontent.com/brickyosu/ugs-files-sorted/refs/heads/main/P/clpokediamond.html" },
+  { name: "Crossy Road", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/refs/heads/master/offline/crossyroad.htm" },
+  { name: "MineCraft 1.12", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/refs/heads/master/offline/1.12.html" },
+  { name: "Basket Random", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/basketrandom.html" },
+  { name: "Super Mario Bros", url: "https://raw.githubusercontent.com/Hexorod/ugs/refs/heads/main/S/clsupermariobros.html" },
+  { name: "Slope", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/refs/heads/master/offline/slope.html" },
+  { name: "Boxing Random", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/refs/heads/master/offline/boxingrandom.htm" },
+  { name: "Volley Random", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/refs/heads/master/offline/volleyrandom.html" },
+  { name: "Soccer Random", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/refs/heads/master/offline/soccerrandom.htm" },
+  { name: "Escape Road 1", url: "http://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/escaperoad.html" },
+  { name: "Escape Road 2", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/escaperoad2.html" },
+  { name: "3D Flight Sim", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/refs/heads/master/offline/3Dflightsimulator.html" },
+  { name: "Agario Clone", url: "https://raw.githubusercontent.com/TobiasMue91/tobiasmue91.github.io/refs/heads/main/games/agario.html" },
+  { name: "Snake Game", url: "https://raw.githubusercontent.com/TobiasMue91/tobiasmue91.github.io/refs/heads/main/games/snake.html" },
+  { name: "3D Asteroids", url: "https://raw.githubusercontent.com/TobiasMue91/tobiasmue91.github.io/refs/heads/main/games/asteroids_3d.html" },
+  { name: "Slope 2 Player", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/refs/heads/master/offline/slope2player.html" },
+  { name: "Call of Duty: Modern Warfare", url: "https://raw.githubusercontent.com/brickyosu/ugs-files-sorted/refs/heads/main/C/clcodmodernwarfare.html" },
+  { name: "Space Waves", url: "https://raw.githubusercontent.com/brickyosu/ugs-files-sorted/refs/heads/main/S/clspacewaves.html" },
+  { name: "Super HOT!!", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/refs/heads/master/offline/superhot.html" },
+  { name: "Super Mario 64", url: "https://raw.githubusercontent.com/brickyosu/ugs-files-sorted/refs/heads/main/S/clsupermario64.html" },
+  { name: "Flappy Bird", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/refs/heads/master/offline/flappybird.html" },
+  { name: "Buckshot Roulette", url: "https://raw.githubusercontent.com/brickyosu/ugs-files-sorted/refs/heads/main/B/clbuckshotroulette.html" },
+  { name: "Pokemon Emerald... Rouge!", url: "https://raw.githubusercontent.com/brickyosu/ugs-files-sorted/refs/heads/main/P/clPokemonemeraldrouge.html" },
+  { name: "Among Us Clone", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/refs/heads/master/offline/amongus.html" },
+  { name: "Endless 3D Sh00ter (Chez)", url: "https://raw.githubusercontent.com/Chezzz37/Html-Game-Overhaul/refs/heads/main/Games/3DEndlessShooter.html" },
+  { name: "Platformer (Chez)", url: "https://raw.githubusercontent.com/Chezzz37/Html-Game-Overhaul/refs/heads/main/Games/platformer.html" },
+  { name: "Platformer Maker (Chez)", url: "https://raw.githubusercontent.com/Chezzz37/Html-Game-Overhaul/refs/heads/main/Games/platformermaker(ALPHA).html" },
+  { name: "(LOADER) gn-math", url: "https://raw.githubusercontent.com/gn-math/gn-math-DONTDMCA/refs/heads/main/singlefile.html" },
+  { name: "(LOADER) SML Singlefile", url: "https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/refs/heads/master/single-file.html" },
+  { name: "(LOADER) UGS Singlefile", url: "https://raw.githubusercontent.com/bubbls/ugs-singlefile/refs/heads/main/AASINGLEFILE.html" },
+  { name: "Hacker-Style Clock (Chez)", url: "https://raw.githubusercontent.com/Chezzz37/Html-Game-Overhaul/refs/heads/main/Apps/hackerstyleclock.html" },
+  { name: "Mini-Beat Maker (Chez)", url: "https://raw.githubusercontent.com/Chezzz37/Html-Game-Overhaul/refs/heads/main/Apps/minibeatmaker.html" },
+  { name: "To-do List (Chez)", url: "https://raw.githubusercontent.com/Chezzz37/Html-Game-Overhaul/refs/heads/main/Apps/todolist.html" },
+  { name: "NautilusOS", url: "https://raw.githubusercontent.com/nautilus-os/NautilusOS/refs/heads/main/NautilusOS-OneFile/index.html" },
+  { name: "LumiOS", url: "https://raw.githubusercontent.com/FritzCohen/LumiOS/refs/heads/main/index.html" },
+  { name: "DingusProxy", url: "https://raw.githubusercontent.com/dinguschan-owo/dingusproxy/refs/heads/main/Offline-File/%F0%9D%99%B3%F0%9D%9A%92%F0%9D%9A%97%F0%9D%9A%90%F0%9D%9A%9E%F0%9D%9A%9C%F0%9D%99%BF%F0%9D%9A%9B%F0%9D%9A%98%F0%9D%9A%A1%F0%9D%9A%A2%F0%9D%99%BE%F0%9D%9A%8F%F0%9D%9A%8F%F0%9D%9A%95%F0%9D%9A%92%F0%9D%9A%97%F0%9D%9A%8E.html" },
+  { name: "Helios", url: "https://raw.githubusercontent.com/dinguschan-owo/Helios/refs/heads/main/Offline-File/Helios-Offline.html" },
+  { name: "Genizy Soundboard", url: "https://raw.githubusercontent.com/genizy/soundboard/refs/heads/main/index.html" },
+  { name: "SoundBoardW", url: "https://soundboardw.net/" },
+  { name: "Tynker Meme Soundboard", url: "https://www.tynker.com/community/projects/play/meme-soundboard/62f1ae42667c79348823eee8/" },
+];
+
+    const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
+
+    function launchGame(gameUrl) {
+      const proxyGameUrl = PROXY_URL + gameUrl;
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', proxyGameUrl, true);
+      xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          const win = window.open('', '_blank');
+          if (win) {
+            win.document.write(xhr.responseText);
+            win.document.close();
+          win.document.body.style.margin = '0';
+// Remove or change overflow to 'auto' to enable scrolling
+win.document.body.style.overflow = 'auto';
+
+          } else {
+            alert('Please allow pop-ups for this site to launch the game.');
+          }
+        } else {
+          console.error('Failed to load game:', xhr.statusText);
+          alert('Could not load the game. Check the console for details and ensure the CORS proxy is working.');
+        }
+      };
+      xhr.onerror = function () {
+        console.error('Network error occurred.');
+        alert('A network error occurred while trying to fetch the game.');
+      };
+      xhr.send();
+    }
+
+    const container = document.getElementById('buttonsContainer');
+    games.forEach(game => {
+      const btn = document.createElement('button');
+      btn.textContent = game.name;
+      btn.onclick = () => launchGame(game.url);
+      container.appendChild(btn);
+    });
+  });
+</script>
+
+</body>
+</html>
